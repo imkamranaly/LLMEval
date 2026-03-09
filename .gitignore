@@ -1,0 +1,13 @@
+#front end react
+node_modules/
+.next
+dist/
+logs/
+package-lock.json
+.idea/*
+# vscode
+.vscode/
+.env
+src/app/robots.txt
+src/app/sitemap.xml
+claude_desktop_config.json

@@ -1,0 +1,129 @@
+{
+  "id": "2026-03-06T11:22:31.765Z",
+  "timestamp": "2026-03-06T11:22:31.765Z",
+  "selectedModels": [
+    "gpt-5-2-thinking"
+  ],
+  "selectedCriteria": [
+    "multi_turn_reasoning"
+  ],
+  "results": [
+    {
+      "modelId": "gpt-5-2-thinking",
+      "modelName": "GPT-5.2 Thinking",
+      "provider": "openai",
+      "criteriaResults": [
+        {
+          "criteriaId": "multi_turn_reasoning",
+          "runs": [
+            {
+              "runIndex": 0,
+              "score": 85,
+              "latencyMs": 7689,
+              "promptTokens": 119,
+              "completionTokens": 396,
+              "totalTokens": 515
+            },
+            {
+              "runIndex": 1,
+              "score": 85,
+              "latencyMs": 6943,
+              "promptTokens": 119,
+              "completionTokens": 460,
+              "totalTokens": 579
+            },
+            {
+              "runIndex": 2,
+              "score": 85,
+              "latencyMs": 7219,
+              "promptTokens": 119,
+              "completionTokens": 353,
+              "totalTokens": 472
+            },
+            {
+              "runIndex": 3,
+              "score": 85,
+              "latencyMs": 7461,
+              "promptTokens": 119,
+              "completionTokens": 399,
+              "totalTokens": 518
+            },
+            {
+              "runIndex": 4,
+              "score": 85,
+              "latencyMs": 9641,
+              "promptTokens": 119,
+              "completionTokens": 354,
+              "totalTokens": 473
+            }
+          ],
+          "averageScore": 85,
+          "stdDev": 0,
+          "averageLatencyMs": 7791,
+          "totalTokensUsed": 2557,
+          "estimatedCostUSD": 0.0844,
+          "normalizedScore": 100
+        }
+      ],
+      "overallScore": 85,
+      "totalCostUSD": 0.0844,
+      "averageLatencyMs": 7791,
+      "evaluatedAt": "2026-03-06T11:22:31.763Z"
+    }
+  ],
+  "recommendations": {
+    "bestForCoding": {
+      "category": "Best for Coding",
+      "modelId": "gpt-5-2-thinking",
+      "modelName": "GPT-5.2 Thinking",
+      "score": 85,
+      "reason": "Scored 85/100 on code generation benchmarks (SWE-bench + HumanEval+), 0 points ahead of closest competitor."
+    },
+    "bestForMath": {
+      "category": "Best for Math",
+      "modelId": "gpt-5-2-thinking",
+      "modelName": "GPT-5.2 Thinking",
+      "score": 85,
+      "reason": "Achieved 85/100 on AIME 2025 + MATH-500, outperforming the next best model by 0 points."
+    },
+    "bestForAgentTasks": {
+      "category": "Best for Agent Tasks",
+      "modelId": "gpt-5-2-thinking",
+      "modelName": "GPT-5.2 Thinking",
+      "score": 33,
+      "reason": "Composite agentic score of 33/100 across tool use, instruction following, and multi-turn reasoning."
+    },
+    "bestCostEfficient": {
+      "category": "Best Cost Efficient",
+      "modelId": "gpt-5-2-thinking",
+      "modelName": "GPT-5.2 Thinking",
+      "score": 0,
+      "reason": "Best performance-to-cost ratio with total evaluation cost of $0.0844 USD and overall score 85/100."
+    },
+    "bestLongContext": {
+      "category": "Best Long Context",
+      "modelId": "gpt-5-2-thinking",
+      "modelName": "GPT-5.2 Thinking",
+      "score": 85,
+      "reason": "Scored 85/100 on Needle-in-Haystack + RULER with 128k token context support."
+    },
+    "generatedAt": "2026-03-06T11:22:31.764Z"
+  },
+  "heatmap": {
+    "models": [
+      "GPT-5.2 Thinking"
+    ],
+    "criteria": [
+      "Multi-Turn Reasoning"
+    ],
+    "matrix": [
+      [
+        100
+      ]
+    ]
+  },
+  "iterationsPerTest": 5,
+  "temperature": 0,
+  "totalCostUSD": 0.0844,
+  "averageLatencyMs": 7791
+}

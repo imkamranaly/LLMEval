@@ -1,0 +1,129 @@
+{
+  "id": "2026-03-06T11:02:37.308Z",
+  "timestamp": "2026-03-06T11:02:37.308Z",
+  "selectedModels": [
+    "gpt-4o"
+  ],
+  "selectedCriteria": [
+    "math_reasoning"
+  ],
+  "results": [
+    {
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "provider": "openai",
+      "criteriaResults": [
+        {
+          "criteriaId": "math_reasoning",
+          "runs": [
+            {
+              "runIndex": 0,
+              "score": 100,
+              "latencyMs": 6150,
+              "promptTokens": 101,
+              "completionTokens": 1105,
+              "totalTokens": 1206
+            },
+            {
+              "runIndex": 1,
+              "score": 100,
+              "latencyMs": 6704,
+              "promptTokens": 101,
+              "completionTokens": 1033,
+              "totalTokens": 1134
+            },
+            {
+              "runIndex": 2,
+              "score": 100,
+              "latencyMs": 4552,
+              "promptTokens": 101,
+              "completionTokens": 1132,
+              "totalTokens": 1233
+            },
+            {
+              "runIndex": 3,
+              "score": 100,
+              "latencyMs": 3862,
+              "promptTokens": 101,
+              "completionTokens": 1081,
+              "totalTokens": 1182
+            },
+            {
+              "runIndex": 4,
+              "score": 100,
+              "latencyMs": 5291,
+              "promptTokens": 101,
+              "completionTokens": 1320,
+              "totalTokens": 1421
+            }
+          ],
+          "averageScore": 100,
+          "stdDev": 0,
+          "averageLatencyMs": 5312,
+          "totalTokensUsed": 6176,
+          "estimatedCostUSD": 0.058,
+          "normalizedScore": 100
+        }
+      ],
+      "overallScore": 100,
+      "totalCostUSD": 0.058,
+      "averageLatencyMs": 5312,
+      "evaluatedAt": "2026-03-06T11:02:37.306Z"
+    }
+  ],
+  "recommendations": {
+    "bestForCoding": {
+      "category": "Best for Coding",
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "score": 100,
+      "reason": "Scored 100/100 on code generation benchmarks (SWE-bench + HumanEval+), 0 points ahead of closest competitor."
+    },
+    "bestForMath": {
+      "category": "Best for Math",
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "score": 100,
+      "reason": "Achieved 100/100 on AIME 2025 + MATH-500, outperforming the next best model by 0 points."
+    },
+    "bestForAgentTasks": {
+      "category": "Best for Agent Tasks",
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "score": 0,
+      "reason": "Composite agentic score of 0/100 across tool use, instruction following, and multi-turn reasoning."
+    },
+    "bestCostEfficient": {
+      "category": "Best Cost Efficient",
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "score": 0,
+      "reason": "Best performance-to-cost ratio with total evaluation cost of $0.0580 USD and overall score 100/100."
+    },
+    "bestLongContext": {
+      "category": "Best Long Context",
+      "modelId": "gpt-4o",
+      "modelName": "GPT-4o",
+      "score": 100,
+      "reason": "Scored 100/100 on Needle-in-Haystack + RULER with 128k token context support."
+    },
+    "generatedAt": "2026-03-06T11:02:37.307Z"
+  },
+  "heatmap": {
+    "models": [
+      "GPT-4o"
+    ],
+    "criteria": [
+      "Mathematical Reasoning"
+    ],
+    "matrix": [
+      [
+        100
+      ]
+    ]
+  },
+  "iterationsPerTest": 5,
+  "temperature": 0,
+  "totalCostUSD": 0.058,
+  "averageLatencyMs": 5312
+}

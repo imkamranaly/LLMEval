@@ -1,0 +1,129 @@
+{
+  "id": "2026-03-06T11:24:48.739Z",
+  "timestamp": "2026-03-06T11:24:48.739Z",
+  "selectedModels": [
+    "gpt-5-2-codex"
+  ],
+  "selectedCriteria": [
+    "code_generation"
+  ],
+  "results": [
+    {
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2 Codex",
+      "provider": "openai",
+      "criteriaResults": [
+        {
+          "criteriaId": "code_generation",
+          "runs": [
+            {
+              "runIndex": 0,
+              "score": 67,
+              "latencyMs": 8005,
+              "promptTokens": 119,
+              "completionTokens": 1454,
+              "totalTokens": 1573
+            },
+            {
+              "runIndex": 1,
+              "score": 67,
+              "latencyMs": 4541,
+              "promptTokens": 119,
+              "completionTokens": 904,
+              "totalTokens": 1023
+            },
+            {
+              "runIndex": 2,
+              "score": 67,
+              "latencyMs": 4800,
+              "promptTokens": 119,
+              "completionTokens": 1085,
+              "totalTokens": 1204
+            },
+            {
+              "runIndex": 3,
+              "score": 70,
+              "latencyMs": 6961,
+              "promptTokens": 119,
+              "completionTokens": 1552,
+              "totalTokens": 1671
+            },
+            {
+              "runIndex": 4,
+              "score": 67,
+              "latencyMs": 4024,
+              "promptTokens": 119,
+              "completionTokens": 702,
+              "totalTokens": 821
+            }
+          ],
+          "averageScore": 68,
+          "stdDev": 1.2,
+          "averageLatencyMs": 5666,
+          "totalTokensUsed": 6292,
+          "estimatedCostUSD": 0.1871,
+          "normalizedScore": 100
+        }
+      ],
+      "overallScore": 68,
+      "totalCostUSD": 0.1871,
+      "averageLatencyMs": 5666,
+      "evaluatedAt": "2026-03-06T11:24:48.738Z"
+    }
+  ],
+  "recommendations": {
+    "bestForCoding": {
+      "category": "Best for Coding",
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2 Codex",
+      "score": 100,
+      "reason": "Scored 100/100 on code generation benchmarks (SWE-bench + HumanEval+), 0 points ahead of closest competitor."
+    },
+    "bestForMath": {
+      "category": "Best for Math",
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2 Codex",
+      "score": 68,
+      "reason": "Achieved 68/100 on AIME 2025 + MATH-500, outperforming the next best model by 0 points."
+    },
+    "bestForAgentTasks": {
+      "category": "Best for Agent Tasks",
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2 Codex",
+      "score": 0,
+      "reason": "Composite agentic score of 0/100 across tool use, instruction following, and multi-turn reasoning."
+    },
+    "bestCostEfficient": {
+      "category": "Best Cost Efficient",
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2 Codex",
+      "score": 0,
+      "reason": "Best performance-to-cost ratio with total evaluation cost of $0.1871 USD and overall score 68/100."
+    },
+    "bestLongContext": {
+      "category": "Best Long Context",
+      "modelId": "gpt-5-2-codex",
+      "modelName": "GPT-5.2 Codex",
+      "score": 68,
+      "reason": "Scored 68/100 on Needle-in-Haystack + RULER with 128k token context support."
+    },
+    "generatedAt": "2026-03-06T11:24:48.739Z"
+  },
+  "heatmap": {
+    "models": [
+      "GPT-5.2 Codex"
+    ],
+    "criteria": [
+      "Code Generation Quality"
+    ],
+    "matrix": [
+      [
+        100
+      ]
+    ]
+  },
+  "iterationsPerTest": 5,
+  "temperature": 0,
+  "totalCostUSD": 0.1871,
+  "averageLatencyMs": 5666
+}
