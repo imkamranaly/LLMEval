@@ -52,7 +52,7 @@ export const MODELS: ModelConfig[] = [
     contextWindow: 1_000_000,
     inputCostPer1kTokens: 0.00125,
     outputCostPer1kTokens: 0.005,
-    apiModel: "gemini-3-pro",
+    apiModel: "gemini-2.5-pro",
   },
   {
     id: "gemini-2-5-pro-deep-think",
@@ -62,7 +62,7 @@ export const MODELS: ModelConfig[] = [
     contextWindow: 1_000_000,
     inputCostPer1kTokens: 0.00350,
     outputCostPer1kTokens: 0.01050,
-    apiModel: "gemini-2-5-pro-deep-think",
+    apiModel: "gemini-2.5-pro-deepthink",
   },
   {
     id: "deepseek-v3-2",

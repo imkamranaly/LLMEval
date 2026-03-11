@@ -1,0 +1,129 @@
+{
+  "id": "2026-03-10T10:04:28.188Z",
+  "timestamp": "2026-03-10T10:04:28.188Z",
+  "selectedModels": [
+    "gemini-3-pro"
+  ],
+  "selectedCriteria": [
+    "code_generation"
+  ],
+  "results": [
+    {
+      "modelId": "gemini-3-pro",
+      "modelName": "Gemini 3 Pro",
+      "provider": "google",
+      "criteriaResults": [
+        {
+          "criteriaId": "code_generation",
+          "runs": [
+            {
+              "runIndex": 0,
+              "score": 0,
+              "latencyMs": 9137,
+              "promptTokens": 110,
+              "completionTokens": 2551,
+              "totalTokens": 2661
+            },
+            {
+              "runIndex": 1,
+              "score": 0,
+              "latencyMs": 8534,
+              "promptTokens": 110,
+              "completionTokens": 2551,
+              "totalTokens": 2661
+            },
+            {
+              "runIndex": 2,
+              "score": 0,
+              "latencyMs": 8914,
+              "promptTokens": 110,
+              "completionTokens": 2551,
+              "totalTokens": 2661
+            },
+            {
+              "runIndex": 3,
+              "score": 0,
+              "latencyMs": 8177,
+              "promptTokens": 110,
+              "completionTokens": 2551,
+              "totalTokens": 2661
+            },
+            {
+              "runIndex": 4,
+              "score": 0,
+              "latencyMs": 8725,
+              "promptTokens": 110,
+              "completionTokens": 2551,
+              "totalTokens": 2661
+            }
+          ],
+          "averageScore": 0,
+          "stdDev": 0,
+          "averageLatencyMs": 8697,
+          "totalTokensUsed": 13305,
+          "estimatedCostUSD": 0.0645,
+          "normalizedScore": 100
+        }
+      ],
+      "overallScore": 0,
+      "totalCostUSD": 0.0645,
+      "averageLatencyMs": 8697,
+      "evaluatedAt": "2026-03-10T10:04:28.187Z"
+    }
+  ],
+  "recommendations": {
+    "bestForCoding": {
+      "category": "Best for Coding",
+      "modelId": "gemini-3-pro",
+      "modelName": "Gemini 3 Pro",
+      "score": 100,
+      "reason": "Scored 100/100 on code generation benchmarks (SWE-bench + HumanEval+), 0 points ahead of closest competitor."
+    },
+    "bestForMath": {
+      "category": "Best for Math",
+      "modelId": "gemini-3-pro",
+      "modelName": "Gemini 3 Pro",
+      "score": 0,
+      "reason": "Achieved 0/100 on AIME 2025 + MATH-500, outperforming the next best model by 0 points."
+    },
+    "bestForAgentTasks": {
+      "category": "Best for Agent Tasks",
+      "modelId": "gemini-3-pro",
+      "modelName": "Gemini 3 Pro",
+      "score": 0,
+      "reason": "Composite agentic score of 0/100 across tool use, instruction following, and multi-turn reasoning."
+    },
+    "bestCostEfficient": {
+      "category": "Best Cost Efficient",
+      "modelId": "gemini-3-pro",
+      "modelName": "Gemini 3 Pro",
+      "score": 0,
+      "reason": "Best performance-to-cost ratio with total evaluation cost of $0.0645 USD and overall score 0/100."
+    },
+    "bestLongContext": {
+      "category": "Best Long Context",
+      "modelId": "gemini-3-pro",
+      "modelName": "Gemini 3 Pro",
+      "score": 0,
+      "reason": "Scored 0/100 on Needle-in-Haystack + RULER with 1M token context support."
+    },
+    "generatedAt": "2026-03-10T10:04:28.188Z"
+  },
+  "heatmap": {
+    "models": [
+      "Gemini 3 Pro"
+    ],
+    "criteria": [
+      "Code Generation Quality"
+    ],
+    "matrix": [
+      [
+        100
+      ]
+    ]
+  },
+  "iterationsPerTest": 5,
+  "temperature": 0,
+  "totalCostUSD": 0.0645,
+  "averageLatencyMs": 8697
+}
