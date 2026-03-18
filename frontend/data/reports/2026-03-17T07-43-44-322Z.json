@@ -1,0 +1,129 @@
+{
+  "id": "2026-03-17T07:43:44.322Z",
+  "timestamp": "2026-03-17T07:43:44.322Z",
+  "selectedModels": [
+    "claude-opus-4-6"
+  ],
+  "selectedCriteria": [
+    "math_reasoning"
+  ],
+  "results": [
+    {
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "provider": "anthropic",
+      "criteriaResults": [
+        {
+          "criteriaId": "math_reasoning",
+          "runs": [
+            {
+              "runIndex": 0,
+              "score": 80,
+              "latencyMs": 4994,
+              "promptTokens": 180,
+              "completionTokens": 995,
+              "totalTokens": 1175
+            },
+            {
+              "runIndex": 1,
+              "score": 80,
+              "latencyMs": 4793,
+              "promptTokens": 180,
+              "completionTokens": 995,
+              "totalTokens": 1175
+            },
+            {
+              "runIndex": 2,
+              "score": 80,
+              "latencyMs": 4814,
+              "promptTokens": 180,
+              "completionTokens": 983,
+              "totalTokens": 1163
+            },
+            {
+              "runIndex": 3,
+              "score": 80,
+              "latencyMs": 4699,
+              "promptTokens": 180,
+              "completionTokens": 998,
+              "totalTokens": 1178
+            },
+            {
+              "runIndex": 4,
+              "score": 80,
+              "latencyMs": 4916,
+              "promptTokens": 180,
+              "completionTokens": 998,
+              "totalTokens": 1178
+            }
+          ],
+          "averageScore": 80,
+          "stdDev": 0,
+          "averageLatencyMs": 4843,
+          "totalTokensUsed": 5869,
+          "estimatedCostUSD": 0.3862,
+          "normalizedScore": 100
+        }
+      ],
+      "overallScore": 80,
+      "totalCostUSD": 0.3862,
+      "averageLatencyMs": 4843,
+      "evaluatedAt": "2026-03-17T07:43:44.319Z"
+    }
+  ],
+  "recommendations": {
+    "bestForCoding": {
+      "category": "Best for Coding",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 80,
+      "reason": "Scored 80/100 on code generation benchmarks (SWE-bench + HumanEval+), 0 points ahead of closest competitor."
+    },
+    "bestForMath": {
+      "category": "Best for Math",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 100,
+      "reason": "Achieved 100/100 on AIME 2025 + MATH-500, outperforming the next best model by 0 points."
+    },
+    "bestForAgentTasks": {
+      "category": "Best for Agent Tasks",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 0,
+      "reason": "Composite agentic score of 0/100 across tool use, instruction following, and multi-turn reasoning."
+    },
+    "bestCostEfficient": {
+      "category": "Best Cost Efficient",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 0,
+      "reason": "Best performance-to-cost ratio with total evaluation cost of $0.3862 USD and overall score 80/100."
+    },
+    "bestLongContext": {
+      "category": "Best Long Context",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 80,
+      "reason": "Scored 80/100 on Needle-in-Haystack + RULER with 1M token context support."
+    },
+    "generatedAt": "2026-03-17T07:43:44.322Z"
+  },
+  "heatmap": {
+    "models": [
+      "Claude Opus 4.6"
+    ],
+    "criteria": [
+      "Mathematical Reasoning"
+    ],
+    "matrix": [
+      [
+        100
+      ]
+    ]
+  },
+  "iterationsPerTest": 5,
+  "temperature": 0,
+  "totalCostUSD": 0.3862,
+  "averageLatencyMs": 4843
+}

@@ -1,0 +1,161 @@
+{
+  "id": "2026-03-17T10:07:12.283Z",
+  "timestamp": "2026-03-17T10:07:12.283Z",
+  "selectedModels": [
+    "claude-opus-4-6"
+  ],
+  "selectedCriteria": [
+    "code_generation"
+  ],
+  "results": [
+    {
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "provider": "anthropic",
+      "criteriaResults": [
+        {
+          "criteriaId": "code_generation",
+          "runs": [
+            {
+              "runIndex": 0,
+              "score": 80,
+              "latencyMs": 11669,
+              "promptTokens": 240,
+              "completionTokens": 3840,
+              "totalTokens": 4080
+            },
+            {
+              "runIndex": 1,
+              "score": 78,
+              "latencyMs": 11755,
+              "promptTokens": 240,
+              "completionTokens": 3840,
+              "totalTokens": 4080
+            },
+            {
+              "runIndex": 2,
+              "score": 78,
+              "latencyMs": 11514,
+              "promptTokens": 240,
+              "completionTokens": 3839,
+              "totalTokens": 4079
+            },
+            {
+              "runIndex": 3,
+              "score": 78,
+              "latencyMs": 11678,
+              "promptTokens": 240,
+              "completionTokens": 3840,
+              "totalTokens": 4080
+            },
+            {
+              "runIndex": 4,
+              "score": 78,
+              "latencyMs": 11487,
+              "promptTokens": 240,
+              "completionTokens": 3840,
+              "totalTokens": 4080
+            }
+          ],
+          "caseResults": [
+            {
+              "promptId": "code_001",
+              "label": "TypeScript: Merge Intervals",
+              "averageScore": 85,
+              "rubric": "Correct algorithm (O(n log n) sort + merge), handles edge cases, TypeScript types, docstring present"
+            },
+            {
+              "promptId": "code_002",
+              "label": "Python: Thread-Safe LRU Cache",
+              "averageScore": 82,
+              "rubric": "Uses OrderedDict or doubly-linked list + hash map, thread-safe with Lock, correct eviction, O(1) operations"
+            },
+            {
+              "promptId": "code_003",
+              "label": "SQL: Top 3 Customers by Revenue",
+              "averageScore": 60,
+              "rubric": "Correct JOIN, date filter, GROUP BY, ORDER BY, LIMIT 3"
+            },
+            {
+              "promptId": "code_004",
+              "label": "Python: Binary Search",
+              "averageScore": 90,
+              "rubric": "Correct binary search logic, O(log n), handles not-found case, type hints, docstring"
+            },
+            {
+              "promptId": "code_005",
+              "label": "JavaScript: Fetch with Exponential Backoff",
+              "averageScore": 75,
+              "rubric": "Correct async/await, exponential backoff (e.g. 2^attempt * 100ms), throws after max retries, handles fetch errors"
+            }
+          ],
+          "averageScore": 78,
+          "stdDev": 0.8,
+          "averageLatencyMs": 11621,
+          "totalTokensUsed": 20399,
+          "estimatedCostUSD": 1.4579,
+          "normalizedScore": 100
+        }
+      ],
+      "overallScore": 78,
+      "totalCostUSD": 1.4579,
+      "averageLatencyMs": 11621,
+      "evaluatedAt": "2026-03-17T10:07:12.279Z"
+    }
+  ],
+  "recommendations": {
+    "bestForCoding": {
+      "category": "Best for Coding",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 100,
+      "reason": "Scored 100/100 on code generation benchmarks (SWE-bench + HumanEval+), 0 points ahead of closest competitor."
+    },
+    "bestForMath": {
+      "category": "Best for Math",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 78,
+      "reason": "Achieved 78/100 on AIME 2025 + MATH-500, outperforming the next best model by 0 points."
+    },
+    "bestForAgentTasks": {
+      "category": "Best for Agent Tasks",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 0,
+      "reason": "Composite agentic score of 0/100 across tool use, instruction following, and multi-turn reasoning."
+    },
+    "bestCostEfficient": {
+      "category": "Best Cost Efficient",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 0,
+      "reason": "Best performance-to-cost ratio with total evaluation cost of $1.4579 USD and overall score 78/100."
+    },
+    "bestLongContext": {
+      "category": "Best Long Context",
+      "modelId": "claude-opus-4-6",
+      "modelName": "Claude Opus 4.6",
+      "score": 78,
+      "reason": "Scored 78/100 on Needle-in-Haystack + RULER with 1M token context support."
+    },
+    "generatedAt": "2026-03-17T10:07:12.282Z"
+  },
+  "heatmap": {
+    "models": [
+      "Claude Opus 4.6"
+    ],
+    "criteria": [
+      "Code Generation Quality"
+    ],
+    "matrix": [
+      [
+        100
+      ]
+    ]
+  },
+  "iterationsPerTest": 5,
+  "temperature": 0,
+  "totalCostUSD": 1.4579,
+  "averageLatencyMs": 11621
+}
