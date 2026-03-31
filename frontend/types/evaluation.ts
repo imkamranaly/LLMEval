@@ -41,6 +41,16 @@ export interface EvaluationCriteria {
   weight: number; // 0-1, used for composite scoring
 }
 
+// ── Per-prompt (test case) result ────────────────────────────
+
+export interface CaseResult {
+  promptId: string;          // e.g. "math_001"
+  label: string;             // short human-readable label
+  averageScore: number;      // mean score across all runs (0-100)
+  expectedAnswer?: string;   // from benchmark definition
+  rubric?: string;           // from benchmark definition
+}
+
 // ── Single test-run result ────────────────────────────────────
 
 export interface RunResult {
@@ -59,6 +69,7 @@ export interface RunResult {
 export interface CriteriaResult {
   criteriaId: CriteriaId;
   runs: RunResult[];
+  caseResults: CaseResult[];    // per-prompt average scores
   averageScore: number;         // mean of run scores
   stdDev: number;
   averageLatencyMs: number;

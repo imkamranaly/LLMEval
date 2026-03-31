@@ -8,6 +8,7 @@ import { BENCHMARK_PROMPTS, type BenchmarkPrompt } from "@/lib/benchmarks";
 import { MODEL_MAP } from "@/data/models";
 import { CRITERIA_MAP } from "@/data/evaluationCriteria";
 import type {
+  CaseResult,
   CriteriaId,
   CriteriaResult,
   ModelEvaluationResult,
@@ -167,6 +168,7 @@ async function evaluateCriteria(
     return {
       criteriaId,
       runs: [],
+      caseResults: [],
       averageScore: 0,
       stdDev: 0,
       averageLatencyMs: 0,
@@ -176,6 +178,9 @@ async function evaluateCriteria(
   }
 
   const allRuns: RunResult[] = [];
+  // Track per-prompt scores across all runs: promptId → scores[]
+  const perPromptScores: Record<string, number[]> = {};
+  for (const bp of prompts) perPromptScores[bp.id] = [];
 
   for (let run = 0; run < RUNS_PER_TEST; run++) {
     let runScoreSum = 0;
@@ -196,12 +201,14 @@ async function evaluateCriteria(
         });
 
         const score = gradeResponse(criteriaId, result.content, bp);
+        perPromptScores[bp.id].push(score);
         runScoreSum += score;
         runLatency += result.latencyMs;
         runPromptTokens += result.promptTokens;
         runCompletionTokens += result.completionTokens;
       } catch (err) {
         // Record failed run — score 0
+        perPromptScores[bp.id].push(0);
         runScoreSum += 0;
         runLatency += 5000; // pessimistic latency for failure
         console.error(`Evaluation error for ${modelId}/${criteriaId}/${bp.id}:`, err);
@@ -219,6 +226,21 @@ async function evaluateCriteria(
     });
   }
 
+  // Build per-case summary (average score across all runs)
+  const caseResults: CaseResult[] = prompts.map((bp) => {
+    const scores = perPromptScores[bp.id];
+    const avg = scores.length > 0
+      ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+      : 0;
+    return {
+      promptId: bp.id,
+      label: bp.label,
+      averageScore: avg,
+      expectedAnswer: bp.expectedAnswer,
+      rubric: bp.rubric,
+    };
+  });
+
   const scores = allRuns.map((r) => r.score);
   const latencies = allRuns.map((r) => r.latencyMs);
   const totalTokens = allRuns.reduce((s, r) => s + r.totalTokens, 0);
@@ -232,6 +254,7 @@ async function evaluateCriteria(
   return {
     criteriaId,
     runs: allRuns,
+    caseResults,
     averageScore: Math.round(scores.reduce((a, b) => a + b, 0) / scores.length),
     stdDev: Math.round(stdDev(scores) * 10) / 10,
     averageLatencyMs: Math.round(latencies.reduce((a, b) => a + b, 0) / latencies.length),

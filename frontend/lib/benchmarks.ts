@@ -10,6 +10,7 @@ import type { CriteriaId } from "@/types/evaluation";
 
 export interface BenchmarkPrompt {
   id: string;
+  label: string;             // short human-readable case name
   prompt: string;
   systemPrompt?: string;
   expectedAnswer?: string;   // used by exact-match scorers
@@ -21,6 +22,7 @@ export interface BenchmarkPrompt {
 const MATH_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "math_001",
+    label: "Quadratic Equation",
     prompt:
       "Find all integer solutions to: x² - 7x + 12 = 0. Show your full working.",
     expectedAnswer: "x=3, x=4",
@@ -28,6 +30,7 @@ const MATH_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "math_002",
+    label: "Average Speed (Harmonic Mean)",
     prompt:
       "A train travels from city A to city B at 60 km/h and returns at 40 km/h. What is the average speed for the round trip? Provide exact value.",
     expectedAnswer: "48 km/h",
@@ -35,6 +38,7 @@ const MATH_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "math_003",
+    label: "Definite Integral",
     prompt:
       "Evaluate the integral: ∫(0 to π) sin(x) dx. Show all steps.",
     expectedAnswer: "2",
@@ -42,6 +46,7 @@ const MATH_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "math_004",
+    label: "Sum of First 100 Integers",
     prompt:
       "What is the sum of the first 100 positive integers? Give only the numeric answer.",
     expectedAnswer: "5050",
@@ -49,6 +54,7 @@ const MATH_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "math_005",
+    label: "Rectangle Area from Perimeter",
     prompt:
       "A rectangle has a perimeter of 54 cm and its length is twice its width. What is the area of the rectangle in cm²? Give only the numeric answer.",
     expectedAnswer: "162",
@@ -60,6 +66,7 @@ const MATH_PROMPTS: BenchmarkPrompt[] = [
 const CODE_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "code_001",
+    label: "TypeScript: Merge Intervals",
     prompt:
       "Write a TypeScript function `mergeIntervals(intervals: [number, number][]): [number, number][]` that merges all overlapping intervals. Include edge cases and a brief docstring.",
     rubric: "Correct algorithm (O(n log n) sort + merge), handles edge cases, TypeScript types, docstring present",
@@ -67,6 +74,7 @@ const CODE_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "code_002",
+    label: "Python: Thread-Safe LRU Cache",
     prompt:
       "Implement a thread-safe LRU cache in Python with O(1) get and put. Capacity provided at construction.",
     rubric: "Uses OrderedDict or doubly-linked list + hash map, thread-safe with Lock, correct eviction, O(1) operations",
@@ -74,6 +82,7 @@ const CODE_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "code_003",
+    label: "SQL: Top 3 Customers by Revenue",
     prompt:
       "Write a SQL query that finds the top 3 customers by total purchase amount in the last 30 days. Tables: orders(id, customer_id, amount, created_at), customers(id, name).",
     rubric: "Correct JOIN, date filter, GROUP BY, ORDER BY, LIMIT 3",
@@ -81,6 +90,7 @@ const CODE_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "code_004",
+    label: "Python: Binary Search",
     prompt:
       "Write a Python function `binary_search(arr: list[int], target: int) -> int` that returns the index of target in a sorted array, or -1 if not found. Include type hints and a docstring.",
     rubric: "Correct binary search logic, O(log n), handles not-found case, type hints, docstring",
@@ -88,6 +98,7 @@ const CODE_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "code_005",
+    label: "JavaScript: Fetch with Exponential Backoff",
     prompt:
       "Write a JavaScript async function `fetchWithRetry(url, maxRetries = 3)` that retries a fetch request on failure with exponential backoff. Include error handling.",
     rubric: "Correct async/await, exponential backoff (e.g. 2^attempt * 100ms), throws after max retries, handles fetch errors",
@@ -99,6 +110,7 @@ const CODE_PROMPTS: BenchmarkPrompt[] = [
 const LONG_CONTEXT_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "ctx_001",
+    label: "Legal Contract Liability Clause",
     prompt:
       "Here is a contract document: [SIMULATED 5000-word legal contract about software licensing with the key clause 'The liability cap is set at USD 250,000 per incident' buried in section 14.3]\n\nQuestion: What is the exact liability cap stated in the contract, and in which section?",
     expectedAnswer: "USD 250,000 per incident in section 14.3",
@@ -106,6 +118,7 @@ const LONG_CONTEXT_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "ctx_002",
+    label: "Codebase Function Call Search",
     prompt:
       "Given the following codebase with 100 files [SIMULATED], find all places where the function `calculateTax` is called and list each file and line number.",
     rubric: "Correctly identifies all call sites, no false positives, proper citation format",
@@ -113,6 +126,7 @@ const LONG_CONTEXT_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "ctx_003",
+    label: "Research Report Solar Prediction",
     prompt:
       "Here is a 200-page research report [SIMULATED] on renewable energy. The conclusion on page 187 states: 'Solar adoption will reach 45% of global electricity by 2035.' What percentage does the report predict for solar adoption and by what year?",
     expectedAnswer: "45% by 2035",
@@ -120,6 +134,7 @@ const LONG_CONTEXT_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "ctx_004",
+    label: "Meeting Transcript Action Item",
     prompt:
       "In the following meeting transcript [SIMULATED 10,000 words covering 8 topics], the action item assigned to Alice regarding the Q3 budget review is: 'Alice to submit revised Q3 budget by August 15th.' What is Alice's action item and its deadline?",
     expectedAnswer: "submit revised Q3 budget by August 15th",
@@ -127,6 +142,7 @@ const LONG_CONTEXT_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "ctx_005",
+    label: "Customer Record Lookup (50k Records)",
     prompt:
       "A dataset of 50,000 customer records [SIMULATED] includes the entry: customer_id=99812, name='Elena Vasquez', signup_date='2021-06-03', tier='Gold'. What is the signup date and tier for customer ID 99812?",
     expectedAnswer: "2021-06-03, Gold",
@@ -138,6 +154,7 @@ const LONG_CONTEXT_PROMPTS: BenchmarkPrompt[] = [
 const INSTRUCTION_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "inst_001",
+    label: "JSON Output (No Markdown)",
     prompt:
       "Respond with ONLY a valid JSON object (no markdown, no explanation) with keys: name (string), age (number), hobbies (array of strings). Use fictional data.",
     rubric: "Pure JSON, no markdown fences, correct types, all three keys present",
@@ -145,6 +162,7 @@ const INSTRUCTION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "inst_002",
+    label: "Exactly 3 Constrained Bullet Points",
     prompt:
       "Write exactly 3 bullet points about climate change. Each bullet must start with a capital letter and end with a period. Use no more than 15 words per bullet.",
     rubric: "Exactly 3 bullets, proper capitalization, ends with period, ≤15 words each",
@@ -152,6 +170,7 @@ const INSTRUCTION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "inst_003",
+    label: "Multi-Language Translation (3 Languages)",
     prompt:
       "Translate the following to French, Spanish, and German, presenting each translation on a separate line with the language name as a label:\n'The quick brown fox jumps over the lazy dog.'",
     rubric: "All three languages, labeled correctly, correct translations",
@@ -159,6 +178,7 @@ const INSTRUCTION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "inst_004",
+    label: "Numbered Planets List (No Extra Text)",
     prompt:
       "List the planets of the solar system in order from the Sun. Output ONLY a numbered list (1. Mercury, 2. Venus, ...). No other text.",
     expectedAnswer: "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune",
@@ -166,6 +186,7 @@ const INSTRUCTION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "inst_005",
+    label: "Passive Voice Rewrite",
     prompt:
       "Rewrite the following sentence in passive voice and output ONLY the rewritten sentence, nothing else:\n'The engineer fixed the bug.'",
     expectedAnswer: "The bug was fixed by the engineer.",
@@ -177,6 +198,7 @@ const INSTRUCTION_PROMPTS: BenchmarkPrompt[] = [
 const STRUCTURED_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "struct_001",
+    label: "JSON Extraction from Text",
     prompt: `Extract the following information from the text and return ONLY a valid JSON object with schema:
 {
   "person": { "name": string, "age": number, "email": string },
@@ -190,12 +212,14 @@ Text: "John Smith, 34 years old (john.smith@acme.com), is the Lead Engineer at A
   },
   {
     id: "struct_002",
+    label: "XML Products Document",
     prompt: `Return an XML document with root element <products> containing 3 <product> elements each with attributes: id (integer), name (string), price (float).`,
     rubric: "Valid XML, root element correct, 3 product children, correct attribute types",
     maxTokens: 256,
   },
   {
     id: "struct_003",
+    label: "CSV Row to JSON",
     prompt: `Parse the following CSV row and return ONLY a valid JSON object with keys: id (number), firstName (string), lastName (string), score (number).
 
 Row: "1042,Jane,Doe,98.5"`,
@@ -204,12 +228,14 @@ Row: "1042,Jane,Doe,98.5"`,
   },
   {
     id: "struct_004",
+    label: "JSON Array of Countries",
     prompt: `Return ONLY a valid JSON array of 3 objects. Each object must have: country (string), capital (string), population_millions (number). Use real data.`,
     rubric: "Valid JSON array, exactly 3 objects, all three keys present and correct types, real country data",
     maxTokens: 256,
   },
   {
     id: "struct_005",
+    label: "Unstructured Text to JSON Event",
     prompt: `Convert the following unstructured text into a JSON object with keys: event (string), date (string, ISO 8601), location (string), attendees (number). Return ONLY the JSON.
 
 Text: "The annual tech summit will be held on March 15, 2025 in San Francisco. Around 3200 people are expected to attend."`,
@@ -222,6 +248,7 @@ Text: "The annual tech summit will be held on March 15, 2025 in San Francisco. A
 const MULTI_TURN_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "multi_001",
+    label: "Japan Trip — Shinkansen Cost",
     prompt: `This is turn 3 of a conversation.
 Turn 1 — User: "I'm planning a trip to Japan in April."
 Turn 1 — Assistant: "Great! April is cherry blossom season. Will you visit Tokyo?"
@@ -233,6 +260,7 @@ Turn 3 — User: "How much does it cost and where do I buy tickets?"`,
   },
   {
     id: "multi_002",
+    label: "Python CSV UnicodeDecodeError Debug",
     prompt: `This is turn 3 of a conversation.
 Turn 1 — User: "I'm debugging a Python script that reads CSV files."
 Turn 1 — Assistant: "Sure! What error are you seeing?"
@@ -244,6 +272,7 @@ Turn 3 — User: "I tried utf-8 but still get the error. What next?"`,
   },
   {
     id: "multi_003",
+    label: "Express + SQLite Todo Route",
     prompt: `This is turn 4 of a conversation.
 Turn 1 — User: "I want to build a REST API for a todo app."
 Turn 1 — Assistant: "Great! Which language/framework are you using?"
@@ -257,6 +286,7 @@ Turn 4 — User: "Show me the Express route for creating a new todo using SQLite
   },
   {
     id: "multi_004",
+    label: "Monthly Budget Remaining Calculation",
     prompt: `This is turn 3 of a conversation.
 Turn 1 — User: "My monthly budget is $3,000. I want to save 20% of it."
 Turn 1 — Assistant: "That means saving $600/month. Would you like tips on where to cut expenses?"
@@ -268,6 +298,7 @@ Turn 3 — User: "If I find a place for $900, how much will I have left to save 
   },
   {
     id: "multi_005",
+    label: "Fantasy World Dual Moon Alignment (LCM)",
     prompt: `This is turn 3 of a conversation.
 Turn 1 — User: "I'm writing a fantasy novel set in a world with two moons."
 Turn 1 — Assistant: "Fascinating! How do the two moons affect the world's tides and calendar?"
@@ -283,6 +314,7 @@ Turn 3 — User: "One moon has a 28-day cycle and the other has a 35-day cycle. 
 const HALLUCINATION_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "hall_001",
+    label: "Capital of Australia",
     prompt:
       "What is the capital of Australia? Give only the city name.",
     expectedAnswer: "Canberra",
@@ -290,6 +322,7 @@ const HALLUCINATION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "hall_002",
+    label: "Eiffel Tower Completion Year",
     prompt:
       "In what year was the Eiffel Tower completed? Give only the year.",
     expectedAnswer: "1889",
@@ -297,6 +330,7 @@ const HALLUCINATION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "hall_003",
+    label: "Author of '1984'",
     prompt:
       "Who wrote the novel '1984'? Give only the author's full name.",
     expectedAnswer: "George Orwell",
@@ -304,6 +338,7 @@ const HALLUCINATION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "hall_004",
+    label: "Atomic Number of Carbon",
     prompt:
       "What is the atomic number of carbon? Give only the number.",
     expectedAnswer: "6",
@@ -311,6 +346,7 @@ const HALLUCINATION_PROMPTS: BenchmarkPrompt[] = [
   },
   {
     id: "hall_005",
+    label: "Speed of Light",
     prompt:
       "What is the speed of light in a vacuum in metres per second? Give only the numeric value.",
     expectedAnswer: "299792458",
@@ -322,6 +358,7 @@ const HALLUCINATION_PROMPTS: BenchmarkPrompt[] = [
 const TOOL_USE_PROMPTS: BenchmarkPrompt[] = [
   {
     id: "tool_001",
+    label: "Weather + Calculator Tool Calls",
     prompt: `You have access to the following tools:
 - get_weather(city: string): returns current weather
 - calculate(expression: string): evaluates a math expression
@@ -336,6 +373,7 @@ Respond with a JSON array of tool calls in the format:
   },
   {
     id: "tool_002",
+    label: "DB Search + Email Sequence",
     prompt: `You have access to the following tools:
 - search_db(query: string, table: string): searches a database table
 - send_email(to: string, subject: string, body: string): sends an email
@@ -349,6 +387,7 @@ Respond with a JSON array of tool calls in the format:
   },
   {
     id: "tool_003",
+    label: "Currency Convert + Format",
     prompt: `You have access to the following tools:
 - convert_currency(amount: number, from: string, to: string): converts currency
 - format_number(value: number, decimals: number): formats a number
@@ -362,6 +401,7 @@ Respond with a JSON array of tool calls in the format:
   },
   {
     id: "tool_004",
+    label: "Read File + Write Backup",
     prompt: `You have access to the following tools:
 - read_file(path: string): reads file contents
 - write_file(path: string, content: string): writes content to a file
@@ -375,6 +415,7 @@ Respond with a JSON array of tool calls in the format:
   },
   {
     id: "tool_005",
+    label: "Stock Price + Share Cost Calculation",
     prompt: `You have access to the following tools:
 - get_stock_price(ticker: string): returns current stock price
 - calculate(expression: string): evaluates a math expression

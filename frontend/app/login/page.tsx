@@ -35,6 +35,7 @@ export default function LoginPage() {
       // Store token and redirect
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("user", JSON.stringify(data.user));
+      document.cookie = `access_token=${data.access_token}; path=/; max-age=86400; SameSite=Strict`;
       router.push("/dashboard");
     } catch {
       setError("Unable to connect to the server. Please try again.");

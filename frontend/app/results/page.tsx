@@ -7,7 +7,8 @@ import ResultsTable from "@/components/ResultsTable";
 import LatencyChart from "@/components/LatencyChart";
 import { loadEvaluation } from "@/lib/evalStore";
 import type { ModelEvaluationResult } from "@/types/evaluation";
-import { BarChart3, Grid3X3, Table2, Clock, AlertCircle } from "lucide-react";
+import { CRITERIA_MAP } from "@/data/evaluationCriteria";
+import { BarChart3, Grid3X3, Table2, Clock, AlertCircle, FlaskConical, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 // Radar chart uses recharts — lazy load to avoid SSR issues
@@ -20,11 +21,24 @@ const RadarChart = dynamic(() => import("@/components/RadarChart"), {
   ),
 });
 
-type Tab = "heatmap" | "radar" | "table" | "latency";
+type Tab = "heatmap" | "radar" | "table" | "latency" | "cases";
+
+function scoreColor(score: number) {
+  if (score >= 75) return "bg-green-500";
+  if (score >= 50) return "bg-yellow-400";
+  return "bg-red-500";
+}
+
+function scoreTextColor(score: number) {
+  if (score >= 75) return "text-green-700";
+  if (score >= 50) return "text-yellow-700";
+  return "text-red-600";
+}
 
 export default function ResultsPage() {
   const [results, setResults] = useState<ModelEvaluationResult[]>([]);
   const [activeTab, setActiveTab] = useState<Tab>("heatmap");
+  const [expandedCriteria, setExpandedCriteria] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const stored = loadEvaluation();
@@ -32,11 +46,20 @@ export default function ResultsPage() {
   }, []);
 
   const tabs: { id: Tab; label: string; Icon: React.ElementType }[] = [
-    { id: "heatmap", label: "Heatmap",       Icon: Grid3X3  },
-    { id: "radar",   label: "Radar Chart",   Icon: BarChart3 },
-    { id: "table",   label: "Results Table", Icon: Table2   },
-    { id: "latency", label: "Latency",       Icon: Clock    },
+    { id: "heatmap", label: "Heatmap",       Icon: Grid3X3     },
+    { id: "radar",   label: "Radar Chart",   Icon: BarChart3   },
+    { id: "table",   label: "Results Table", Icon: Table2      },
+    { id: "latency", label: "Latency",       Icon: Clock       },
+    { id: "cases",   label: "Test Cases",    Icon: FlaskConical },
   ];
+
+  function toggleCriteria(id: string) {
+    setExpandedCriteria((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
 
   if (results.length === 0) {
     return (
@@ -118,6 +141,101 @@ export default function ResultsPage() {
               Detailed Scores
             </h2>
             <ResultsTable results={results} />
+          </div>
+        )}
+
+        {activeTab === "cases" && (
+          <div>
+            <h2 className="font-semibold text-gray-800 mb-1">Test Case Breakdown</h2>
+            <p className="text-xs text-gray-500 mb-4">
+              5 benchmark cases per criteria — scores averaged across all 5 runs (temperature = 0)
+            </p>
+
+            <div className="space-y-3">
+              {results[0]?.criteriaResults
+                .filter((cr) => cr.caseResults && cr.caseResults.length > 0)
+                .map((cr) => {
+                  const criteriaName = CRITERIA_MAP[cr.criteriaId]?.name ?? cr.criteriaId;
+                  const isExpanded = expandedCriteria.has(cr.criteriaId);
+
+                  return (
+                    <div key={cr.criteriaId} className="border border-gray-200 rounded-xl overflow-hidden">
+                      {/* Criteria header */}
+                      <button
+                        onClick={() => toggleCriteria(cr.criteriaId)}
+                        className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="font-semibold text-sm text-gray-800">{criteriaName}</span>
+                          <span className="text-xs text-gray-500">{cr.caseResults.length} cases</span>
+                        </div>
+                        <ChevronDown
+                          size={16}
+                          className={`text-gray-400 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                        />
+                      </button>
+
+                      {/* Case rows */}
+                      {isExpanded && (
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="border-b border-gray-100 bg-white">
+                                <th className="text-left px-4 py-2 font-medium text-gray-500 text-xs w-6">#</th>
+                                <th className="text-left px-4 py-2 font-medium text-gray-500 text-xs">Case</th>
+                                <th className="text-left px-4 py-2 font-medium text-gray-500 text-xs">Expected Answer / Rubric</th>
+                                {results.map((r) => (
+                                  <th key={r.modelId} className="text-center px-3 py-2 font-medium text-gray-500 text-xs whitespace-nowrap">
+                                    {r.modelName.split(" ").slice(0, 2).join(" ")}
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {cr.caseResults.map((c, idx) => (
+                                <tr key={c.promptId} className="border-b border-gray-50 hover:bg-gray-50">
+                                  <td className="px-4 py-2.5 text-xs text-gray-400">{idx + 1}</td>
+                                  <td className="px-4 py-2.5">
+                                    <div className="font-medium text-gray-800 text-xs">{c.label}</div>
+                                    <div className="text-xs text-gray-400 font-mono">{c.promptId}</div>
+                                  </td>
+                                  <td className="px-4 py-2.5 max-w-xs">
+                                    {c.expectedAnswer ? (
+                                      <span className="text-xs text-green-700 bg-green-50 px-1.5 py-0.5 rounded font-mono">
+                                        {c.expectedAnswer.length > 60
+                                          ? c.expectedAnswer.slice(0, 60) + "…"
+                                          : c.expectedAnswer}
+                                      </span>
+                                    ) : c.rubric ? (
+                                      <span className="text-xs text-blue-700 italic">
+                                        {c.rubric.length > 80 ? c.rubric.slice(0, 80) + "…" : c.rubric}
+                                      </span>
+                                    ) : (
+                                      <span className="text-xs text-gray-300">—</span>
+                                    )}
+                                  </td>
+                                  {results.map((r) => {
+                                    const modelCr = r.criteriaResults.find((x) => x.criteriaId === cr.criteriaId);
+                                    const modelCase = modelCr?.caseResults.find((x) => x.promptId === c.promptId);
+                                    const score = modelCase?.averageScore ?? 0;
+                                    return (
+                                      <td key={r.modelId} className="px-3 py-2.5 text-center">
+                                        <span className={`inline-block min-w-[36px] px-2 py-0.5 rounded-full text-xs font-bold text-white ${scoreColor(score)}`}>
+                                          {score}
+                                        </span>
+                                      </td>
+                                    );
+                                  })}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         )}
 
